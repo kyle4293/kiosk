@@ -9,7 +9,7 @@ import java.util.Scanner;
 public class MenuController {
     public static LocalDateTime completeTime;
 
-    public static void displayManagementMenu(List<Order> completeList, List<Order> waitList, Scanner sc) {
+    public static void displayManagementMenu(List<Menu> menuList, List<Order> completeList, List<Order> waitList, Scanner sc) {
         System.out.println("__________________________________\n");
         System.out.println("[ SHAKESHACK 관리프로그램 ]");
 
@@ -25,12 +25,38 @@ public class MenuController {
         if (choice == 1) {
             displayWaitList(completeList, waitList, sc);
         } else if (choice == 2) {
-            displaCompleteList(completeList);
+            displayCompleteList(completeList);
+        } else if (choice == 3) {
+            displayCreateMenu(menuList, sc);
         }
 
     }
 
-    public static void displaCompleteList(List<Order> completeList) {
+    public static void displayCreateMenu(List<Menu> menuList, Scanner sc) {
+        System.out.print("메뉴 이름을 입력 하세요 : ");
+        String name = sc.nextLine();
+        name = sc.nextLine();
+
+        System.out.print("메뉴 설명을 입력 하세요 : ");
+        String description = sc.nextLine();
+
+
+        System.out.println("\n이름 : " + name + " 설명 : " + description);
+        System.out.println("위와 같은 메뉴를 추가하시겠습니까?");
+        System.out.println("1. 확인 2. 취소 ");
+        int checkNum = sc.nextInt();
+
+        if (checkNum == 1) {
+            Menu menu = new Menu(name, description);
+            menuList.add(menu);
+        } else if (checkNum == 2) {
+            System.out.println("메뉴추가를 취소 하셨습니다. \n");
+        } else {
+            System.out.println("번호를 잘못 입력 하셨습니다.\n");
+        }
+    }
+
+    public static void displayCompleteList(List<Order> completeList) {
         System.out.println("__________________________________\n");
         System.out.println("[ 완료주문 목록 ]");
 

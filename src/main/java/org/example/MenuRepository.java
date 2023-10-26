@@ -50,4 +50,5 @@ public class MenuRepository {
 
         menuList.add(m1);menuList.add(m2);menuList.add(m3);menuList.add(m4);
     }
+
 }

@@ -40,7 +40,7 @@ public class OrderController {
             }
             else if (choice==menuList.size()+3) {
                 System.out.println("관리 프로그램");
-                displayManagementMenu(completeList, waitList, sc);
+                displayManagementMenu(menuList, completeList, waitList, sc);
             }
             else if (choice==menuList.size()+4) {
                 System.out.println("프로그램을 종료합니다.");
