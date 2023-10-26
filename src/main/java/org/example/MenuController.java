@@ -111,6 +111,7 @@ public class MenuController {
         System.out.println("[ ORDER MENU ]");
         System.out.println(String.format("%-2d. %-15s | %s", (++i), "Order",  "장바구니를 확인 후 주문합니다."));
         System.out.println(String.format("%-2d. %-15s | %s", (++i), "Cancel",  "진행중인 주문을 취소합니다."));
+        System.out.println(String.format("%-2d. %-15s | %s", (++i), "List",  "최근 완료된 주문과 대기중인 주문 목록을 출력합니다."));
         System.out.println(String.format("%-2d. %-15s | %s", (++i), "Management",  "상점 관리 프로그램."));
         System.out.println(String.format("%-2d. %-15s | %s", (++i), "Quit",  "프로그램 종료."));
 

@@ -5,6 +5,7 @@ import java.util.*;
 import static org.example.MenuController.*;
 import static org.example.OrderService.cancelOrder;
 import static org.example.OrderService.displayOrder;
+import static org.example.OrderService.displayOrderList;
 
 public class OrderController {
 
@@ -35,10 +36,13 @@ public class OrderController {
                 cancelOrder(order, sc);
             }
             else if (choice==menuList.size()+2) {
+                displayOrderList(completeList, waitList);
+            }
+            else if (choice==menuList.size()+3) {
                 System.out.println("관리 프로그램");
                 displayManagementMenu(completeList, waitList, sc);
             }
-            else if (choice==menuList.size()+3) {
+            else if (choice==menuList.size()+4) {
                 System.out.println("프로그램을 종료합니다.");
                 break;
             }

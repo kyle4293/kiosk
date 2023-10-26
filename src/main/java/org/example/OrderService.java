@@ -2,7 +2,6 @@ package org.example;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Queue;
 import java.util.Scanner;
 
 public class OrderService {
@@ -70,6 +69,54 @@ public class OrderService {
             order.clearCart();
             System.out.println("__________________________________\n");
             System.out.println("주문이 취소되었습니다.");
+        }
+    }
+
+    public static void displayOrderList(List<Order> completeList, List<Order> waitList) {
+        System.out.println("__________________________________\n");
+        System.out.println("[ 완료주문 목록 ]");
+
+        int i = 1;
+
+        if(completeList.isEmpty()) {
+            System.out.println("최근 완료된 주문이 없습니다.");
+        } else { // 완료된 최근주문 최대 3개 출력
+            int count = 0;
+            for (Order order: completeList) {
+                // completeList가 3개가 넘어갈 경우 출력 종료
+                count++;
+                if (count > 3) {
+                    break;
+                }
+                System.out.println("_______________");
+                System.out.println(String.format("Order. %-2d", (i++)));
+                List<Product> cart = order.getCart();
+                double total = 0;
+                for (int j = 0; j < cart.size(); j++) {
+                    Product p = cart.get(j);
+                    System.out.println(String.format("%-15s | W %5.0f | %s", p.getName(), p.getPrice(), p.getDescription()));
+                    total += p.getPrice();
+                }
+                System.out.println(String.format("[ Total : W %5.0f ]",total));
+            }
+        }
+
+        System.out.println("__________________________________\n");
+        System.out.println("[ 대기주문 목록 ]");
+
+        i = 1;
+
+        for (Order order: waitList) {
+            System.out.println("_______________");
+            System.out.println(String.format("Order. %-2d", (i++)));
+            List<Product> cart = order.getCart();
+            double total = 0;
+            for (int j = 0; j < cart.size(); j++) {
+                Product p = cart.get(j);
+                System.out.println(String.format("%-15s | W %5.0f | %s", p.getName(), p.getPrice(), p.getDescription()));
+                total += p.getPrice();
+            }
+            System.out.println(String.format("[ Total : W %5.0f ]",total));
         }
     }
 

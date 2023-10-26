@@ -7,10 +7,8 @@ public class Product extends Menu {
         super(name, description);
         this.price = price;
     }
-
     public double getPrice() {
         return price;
     }
-
 
 }
