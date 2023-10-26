@@ -2,7 +2,6 @@ package org.example;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Queue;
 import java.util.Scanner;
 
 public class OrderService {
@@ -111,8 +110,6 @@ public class OrderService {
             }
             System.out.println(String.format("[ Total : W %5.0f ]",total));
         }
-
-
     }
 
 }
