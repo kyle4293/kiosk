@@ -38,5 +38,7 @@ public class Order implements Cloneable {
         return orderTime;
     }
 
-
+    public String getMessage() {
+        return message;
+    }
 }
