@@ -6,6 +6,10 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+<<<<<<< HEAD
+=======
+        <module name="kiosk" />
+>>>>>>> 5bcaef77bdfa34936ba15b6566bc934aa9483c78
       </profile>
     </annotationProcessing>
   </component>
