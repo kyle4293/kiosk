@@ -1,12 +1,13 @@
 package org.example;
 
+import java.time.LocalDateTime;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Queue;
 import java.util.Scanner;
 
 public class MenuController {
-
+    public static LocalDateTime completeTime;
     public static void displayManagementMenu(List<Order> completeList, List<Order> waitList, Scanner sc) {
         System.out.println("__________________________________\n");
         System.out.println("[ SHAKESHACK 관리프로그램 ]");
@@ -38,6 +39,8 @@ public class MenuController {
         for (Order order: completeList) {
             System.out.println("_______________");
             System.out.println(String.format("Order. %-2d", (i++)));
+            System.out.println("완료일시. "+getCompleteTime());
+            System.out.println("요청사항. "+order.getMessage());
             List<Product> cart = order.getCart();
             double total = 0;
             for (int j = 0; j < cart.size(); j++) {
@@ -60,6 +63,8 @@ public class MenuController {
         for (Order order: waitList) {
             System.out.println("_______________");
             System.out.println(String.format("Order. %-2d", (i++)));
+            System.out.println("주문일시. "+order.getOrderTime());
+            System.out.println("요청사항. "+order.getMessage());
             List<Product> cart = order.getCart();
             double total = 0;
             for (int j = 0; j < cart.size(); j++) {
@@ -74,6 +79,8 @@ public class MenuController {
         Order o = waitList.get(choice);
         System.out.println("__________________________________\n");
         System.out.println(String.format("Order. %-2d", (choice+1)));
+        System.out.println("주문일시. "+o.getOrderTime());
+        System.out.println("요청사항. "+o.getMessage());
         List<Product> c = o.getCart();
         double total = 0;
         for (int j = 0; j < c.size(); j++) {
@@ -88,6 +95,7 @@ public class MenuController {
         if (choice==1) {
             completeList.add(o);
             waitList.remove(o);
+            completeTime = LocalDateTime.now();
             System.out.println("주문이 완료처리 되었습니다. \n");
         }
         else {
@@ -147,4 +155,7 @@ public class MenuController {
         }
     }
 
+    public static LocalDateTime getCompleteTime() {
+        return completeTime;
+    }
 }
