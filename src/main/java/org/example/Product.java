@@ -11,4 +11,6 @@ public class Product extends Menu {
     public double getPrice() {
         return price;
     }
+
+
 }
