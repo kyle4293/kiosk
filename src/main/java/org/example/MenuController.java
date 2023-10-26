@@ -1,10 +1,7 @@
 package org.example;
 
 import java.time.LocalDateTime;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Queue;
-import java.util.Scanner;
+import java.util.*;
 
 public class MenuController {
     public static LocalDateTime completeTime;
@@ -27,9 +24,84 @@ public class MenuController {
         } else if (choice == 2) {
             displayCompleteList(completeList);
         } else if (choice == 3) {
-            displayCreateMenu(menuList, sc);
+            System.out.println("1. 상품 생성        2. 메뉴 생성");
+            int num = sc.nextInt();
+            if(num==1){
+                System.out.println(" 상품을 추가할 메뉴를 선택해 주세요.");
+                displayMenu1(menuList);
+
+                int num1=sc.nextInt();
+                Menu m = menuList.get(num1-1);
+                System.out.println(m.getName());
+                displayCreateProduct(m);
+            }
+            else if(num==2) {
+                displayCreateMenu(menuList, sc);
+            }
+
+        } else if (choice==4) {
+            System.out.println(" 삭제할 상품이 있는 메뉴를 선택해 주세요.");
+            displayMenu1(menuList);
+
+            int num1=sc.nextInt();
+            Menu m = menuList.get(num1-1);
+            displayDeleteProduct(m);
+
         }
 
+    }
+
+    public static void displayDeleteProduct( Menu m) {
+        Scanner sc = new Scanner(System.in);
+        List<Product> products = m.getProducts();
+
+        int i;
+        for (i = 0; i < products.size(); i++) {
+            Product p = products.get(i);
+            System.out.println(String.format("%-2d. %-20s | W %5.0f | %s", (i + 1), p.getName(), p.getPrice(), p.getDescription()));
+        }
+
+        int choice = sc.nextInt() - 1;
+        Product p = products.get(choice);
+        System.out.println("__________________________________\n");
+        System.out.println(String.format("%-15s | W %5.0f | %s", p.getName(), p.getPrice(), p.getDescription()));
+        System.out.println("위 메뉴를 삭제 하시겠습니까?");
+        System.out.println("1. 확인       2. 취소");
+        int num =sc.nextInt();
+        if(num==1){
+            products.remove(choice);
+            System.out.print("상픔 삭제가 완료 되었습니다. ");
+        } else if (num==2) {
+            System.out.print("상픔 삭제가 취소 되었습니다. ");
+        }
+
+    }
+
+    public static void displayCreateProduct( Menu m) {
+        Scanner sc = new Scanner(System.in);
+        List<Product> products = m.getProducts();
+        System.out.print("상품이름을 입력하세요 : ");
+        String Name = sc.nextLine();
+
+
+        System.out.print("상품가격을 입력하세요 : ");
+        double Price = sc.nextDouble();
+        sc.nextLine();
+
+        System.out.print("설명을 입력하세요 : ");
+        String Description = sc.nextLine();
+        m.addProduct(new Product(Name, Price, Description));
+//        products.add(new Product(Name, Price, Description));
+
+        System.out.print("상픔 생성이 완료 되었습니다. ");
+    }
+    public static void displayMenu1(List<Menu> menuList) {
+
+        int i;
+        for (i = 0; i < menuList.size(); i++) {
+            Menu m = menuList.get(i);
+            System.out.println(String.format("%-2d. %-15s | %s", (i + 1), m.getName(), m.getDescription()));
+        }
     }
 
     public static void displayCreateMenu(List<Menu> menuList, Scanner sc) {
@@ -48,6 +120,7 @@ public class MenuController {
 
         if (checkNum == 1) {
             Menu menu = new Menu(name, description);
+            menu.setProducts(new ArrayList<>());
             menuList.add(menu);
         } else if (checkNum == 2) {
             System.out.println("메뉴추가를 취소 하셨습니다. \n");
