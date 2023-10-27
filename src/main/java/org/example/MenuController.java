@@ -24,9 +24,11 @@ public class MenuController {
         } else if (choice == 2) {
             displayCompleteList(completeList);
         } else if (choice == 3) {
+            System.out.println("--------------------------------------------------");
             System.out.println("1. 상품 생성        2. 메뉴 생성");
             int num = sc.nextInt();
             if(num==1){
+                System.out.println("--------------------------------------------------");
                 System.out.println(" 상품을 추가할 메뉴를 선택해 주세요.");
                 displayMenu1(menuList);
 
@@ -40,19 +42,49 @@ public class MenuController {
             }
 
         } else if (choice==4) {
-            System.out.println(" 삭제할 상품이 있는 메뉴를 선택해 주세요.");
-            displayMenu1(menuList);
+            System.out.println("--------------------------------------------------\n");
+            System.out.println("1. 상품 제거        2. 메뉴 제거");
+            int num = sc.nextInt();
+            if(num==1){
+                System.out.println("--------------------------------------------------\n");
+                System.out.println(" 삭제할 상품이 있는 메뉴를 선택해 주세요.");
+                displayMenu1(menuList);
 
-            int num1=sc.nextInt();
-            Menu m = menuList.get(num1-1);
-            displayDeleteProduct(m);
+                int num1=sc.nextInt();
+                Menu m = menuList.get(num1-1);
+                displayDeleteProduct(m,sc);
+            }
+            else if(num==2) {
+                displayDeleteMenu(menuList, sc);
+            }
+
 
         }
 
     }
+    public static void displayDeleteMenu(List<Menu> menuList, Scanner sc) {
+        System.out.println("삭제할 메뉴을 선택해 주세요. ");
+        displayMenu1(menuList);
+        int choice;
+        choice = sc.nextInt()-1;
 
-    public static void displayDeleteProduct( Menu m) {
-        Scanner sc = new Scanner(System.in);
+        Menu m = menuList.get(choice);
+        System.out.println("--------------------------------------------------\n");
+        System.out.println(String.format("%-2d. %-15s | %s", (choice+1), m.getName(),m.getDescription()));
+        System.out.println("위와 같은 메뉴를 삭제하시겠습니까?");
+        System.out.println("1. 확인 2. 취소 ");
+        int checkNum = sc.nextInt();
+
+        if (checkNum == 1) {
+            menuList.remove(choice);
+            System.out.println("메뉴가 삭제 되었습니다. ");
+        } else if (checkNum == 2) {
+            System.out.println("메뉴삭제를 취소 하셨습니다. \n");
+        } else {
+            System.out.println("번호를 잘못 입력 하셨습니다.\n");
+        }
+    }
+    public static void displayDeleteProduct( Menu m, Scanner sc) {
         List<Product> products = m.getProducts();
 
         int i;
@@ -60,12 +92,12 @@ public class MenuController {
             Product p = products.get(i);
             System.out.println(String.format("%-2d. %-20s | W %5.0f | %s", (i + 1), p.getName(), p.getPrice(), p.getDescription()));
         }
-
+        System.out.println("삭제할 상품의 번호를 입력해주세요.");
         int choice = sc.nextInt() - 1;
         Product p = products.get(choice);
-        System.out.println("__________________________________\n");
+        System.out.println("--------------------------------------------------\n");
         System.out.println(String.format("%-15s | W %5.0f | %s", p.getName(), p.getPrice(), p.getDescription()));
-        System.out.println("위 메뉴를 삭제 하시겠습니까?");
+        System.out.println("위 상품를 삭제 하시겠습니까?");
         System.out.println("1. 확인       2. 취소");
         int num =sc.nextInt();
         if(num==1){
@@ -80,6 +112,7 @@ public class MenuController {
     public static void displayCreateProduct( Menu m) {
         Scanner sc = new Scanner(System.in);
         List<Product> products = m.getProducts();
+        System.out.println("--------------------------------------------------\n");
         System.out.print("상품이름을 입력하세요 : ");
         String Name = sc.nextLine();
 
@@ -91,7 +124,6 @@ public class MenuController {
         System.out.print("설명을 입력하세요 : ");
         String Description = sc.nextLine();
         m.addProduct(new Product(Name, Price, Description));
-//        products.add(new Product(Name, Price, Description));
 
         System.out.print("상픔 생성이 완료 되었습니다. ");
     }
@@ -105,6 +137,7 @@ public class MenuController {
     }
 
     public static void displayCreateMenu(List<Menu> menuList, Scanner sc) {
+        System.out.println("--------------------------------------------------\n");
         System.out.print("메뉴 이름을 입력 하세요 : ");
         String name = sc.nextLine();
         name = sc.nextLine();
@@ -112,7 +145,7 @@ public class MenuController {
         System.out.print("메뉴 설명을 입력 하세요 : ");
         String description = sc.nextLine();
 
-
+        System.out.println("--------------------------------------------------\n");
         System.out.println("\n이름 : " + name + " 설명 : " + description);
         System.out.println("위와 같은 메뉴를 추가하시겠습니까?");
         System.out.println("1. 확인 2. 취소 ");
