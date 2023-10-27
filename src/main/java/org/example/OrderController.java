@@ -29,7 +29,10 @@ public class OrderController {
 
             int choice = sc.nextInt()-1;
 
-            if (choice==menuList.size()) {
+            if (choice==-1) {
+                displayManagementMenu(menuList, completeList, waitList, sc);
+            }
+            else if (choice==menuList.size()) {
                 displayOrder(waitList, order, sc);
             }
             else if (choice==menuList.size()+1) {
@@ -39,10 +42,6 @@ public class OrderController {
                 displayOrderList(completeList, waitList);
             }
             else if (choice==menuList.size()+3) {
-                System.out.println("관리 프로그램");
-                displayManagementMenu(menuList, completeList, waitList, sc);
-            }
-            else if (choice==menuList.size()+4) {
                 System.out.println("프로그램을 종료합니다.");
                 break;
             }
